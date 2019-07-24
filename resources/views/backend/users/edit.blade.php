@@ -1,46 +1,46 @@
 @extends('layouts.backend')
 <div class="content-header text-center">
-    <h2>Create User</h2>
+    <h2>Update User</h2>
 </div>
 @section('content')
-
     <div class="container">
         <div class="row box-body">
-            <form class="form-horizontal" method="POST" action="{{ route('user.store')}}"
+            <form class="form-horizontal" method="POST" action="{{ route('user.update',['id' => $user->id]) }}"
                   enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="_method" value="PUT">
                 <div class="form-group col-sm-8">
                     <label>Name<span class="text-danger">*</span></label>
-                    <input class="form-control" name="name" value="{{ old('name') }}">
+                    <input class="form-control" name="name" value="{{ $user->name }}">
                     <p class="text-danger">{{ $errors->first('name')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label>Email<span class="text-danger">*</span></label>
-                    <input class="form-control" name="email" value="{{ old('email') }}">
+                    <input class="form-control" name="email" value="{{ $user->email }}">
                     <p class="text-danger">{{ $errors->first('email')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label>Phone<span class="text-danger">*</span></label>
-                    <input class="form-control" placeholder="" name="phone" value="{{ old('phone')  }}">
+                    <input class="form-control" placeholder="" name="phone" value="{{ $user->phone  }}">
                     <p class="text-danger">{{ $errors->first('phone')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label>Address<span class="text-danger">*</span></label>
-                    <input class="form-control" placeholder="" name="address" value="{{ old('address') }}">
+                    <input class="form-control" placeholder="" name="address" value="{{ $user->address }}">
                     <p class="text-danger">{{ $errors->first('address')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label>Birthday<span class="text-danger">*</span></label>
-                    <input  type="date" class="form-control" name="dob" value="{{ old('dob')  }}">
+                    <input  type="date" class="form-control" name="dob" value="{{ $user->dob  }}">
                     <p class="text-danger">{{ $errors->first('dob')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label>Password<span class="text-danger">*</span></label>
-                    <input class="form-control" type="password" name="password" value="{{ old('password')  }}">
+                    <input class="form-control" type="password" name="password" value="">
                     <p class="text-danger">{{ $errors->first('password')}}</p>
                 </div>
                 <div class="form-group col-sm-8">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Thêm Mới</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Lưu Lại</button>
                 </div>
             </form>
         </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -48,10 +49,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->address = $request->address;
         $user->dob = $request->dob;
-        return back()->with('info','You added new items, follow next step!');
         $user->save();
-
-        redirect()->route('user.index')->with([
+        return redirect(route('user.index'))->with([
             'success','Item created successfully!',
             'error','You have no permission for this page!'
         ]);
@@ -65,7 +64,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('backend.users.show')->with([
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -76,7 +78,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('backend.users.edit')->with([
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -86,9 +91,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        $user->save();
+        return redirect(route('user.index'));
     }
 
     /**
@@ -99,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect(route('user.index'));
     }
 }

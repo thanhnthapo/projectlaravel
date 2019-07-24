@@ -180,4 +180,7 @@ table.tablesorter thead tr th:hover {
   background: #ecededcc;
   color: #cc8805;
 }
+button.float-left {
+    float: left;
+}
 
