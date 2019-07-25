@@ -34,19 +34,4 @@ class CreateUserRequest extends FormRequest
             'password'   => 'required|min:6'
         ];
     }
-    public function messages(){
-        return[
-            'name.required' => 'Trường không đươc bỏ trống',
-            'name.max' => 'Không được nhập quá 255 ký tự',
-            'email.required' => 'Trường không đươc bỏ trống',
-            'email.email' => 'Email không đúng định dạng',
-            'email.unique' => 'Email đã tồn tại',
-            'dob.required' => 'Trường không đươc bỏ trống',
-            'address.required' => 'Trường không đươc bỏ trống',
-            'phone.required' => 'Trường không đươc bỏ trống',
-            'phone.unique' => 'Số điện thoại đã tồn tại',
-            'password.required' => 'Trường không đươc bỏ trống',
-            'password.min' => 'Mật khẩu chứa ít nhất 6 ký tự'
-        ];
-    }
 }

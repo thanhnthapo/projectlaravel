@@ -18,7 +18,11 @@ li a{
 }
 a{ color: black }
 label{width: 100px; margin: 10px 10px;font-size: 14px;}
-ul.pagination{padding-left: 400px;}
+.pagination{
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
 #wrapper {
   padding-left: 0;
 }

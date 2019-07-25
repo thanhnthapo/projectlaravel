@@ -6,6 +6,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
+                @if ($message = Session::get('success'))
+                @endif
                 <div class="table-responsive">
                         <button class="btn btn-success" style="margin: 10px 0px"><a href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Thêm mới</a></button>
                     <form class="form-search" action="/action_page.php">
@@ -41,7 +43,7 @@
                                     <form action="{{ route('user.destroy',$user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Xác nhậ   n xóa?')"><i class="fa fa-trash-o"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -50,6 +52,7 @@
                         </tbody>
                         </thead>
                     </table>
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

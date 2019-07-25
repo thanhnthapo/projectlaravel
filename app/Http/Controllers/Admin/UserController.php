@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(8);
-        return view('backend.users.index')->with([
+        return view('backend.users.index',[
             'users' => $users,
         ]);
     }
@@ -42,18 +42,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->password = Hash::make($request->password);
-        $user->address = $request->address;
-        $user->dob = $request->dob;
-        $user->save();
-        return redirect(route('user.index'))->with([
-            'success','Item created successfully!',
-            'error','You have no permission for this page!'
-        ]);
+        $request['password'] = Hash::make($request->password);
+        User::create($request->all());
+        return redirect()->route('user.index')->with(
+            'success','User create successfully!'
+        );
     }
 
     /**
@@ -64,8 +57,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('backend.users.show')->with([
+        $user = User::findOrFail($id);
+        return view('backend.users.show',[
             'user' => $user,
         ]);
     }
@@ -79,7 +72,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('backend.users.edit')->with([
+        return view('backend.users.edit', [
             'user' => $user,
         ]);
     }
@@ -96,7 +89,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
         $user->save();
-        return redirect(route('user.index'));
+        return redirect()->route('user.index');
     }
 
     /**
@@ -107,7 +100,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect(route('user.index'));
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }

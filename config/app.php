@@ -1,5 +1,6 @@
 <?php
-
+$pageUser = config('app.pageUser');
+config(['app.pageUser' => '8']);
 return [
 
     /*
@@ -133,7 +134,6 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
     'providers' => [
 
         /*
@@ -229,3 +229,4 @@ return [
     ],
 
 ];
+
